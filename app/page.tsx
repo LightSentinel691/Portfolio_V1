@@ -11,8 +11,7 @@ import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <>
-      <SplashManager />
+    <SplashManager>
       <Navbar />
       <Sidebar />
       <main className="flex min-h-screen flex-col w-full selection:bg-accent selection:text-black">
@@ -24,6 +23,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </SplashManager>
   );
 }

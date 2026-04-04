@@ -3,18 +3,19 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function Splash({ onComplete }: { onComplete: () => void }) {
+export function Splash({ onComplete, onExitStart }: { onComplete: () => void, onExitStart: () => void }) {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     // Hide splash after 2200ms grace period
     const timer = setTimeout(() => {
       setIsVisible(false);
+      onExitStart(); // Trigger the synchronized entrance of the underlying main layout
       setTimeout(onComplete, 1200); // give time for the ethereal exit animation
     }, 2200);
 
     return () => clearTimeout(timer);
-  }, [onComplete]);
+  }, [onComplete, onExitStart]);
 
   return (
     <AnimatePresence>

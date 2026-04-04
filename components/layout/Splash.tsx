@@ -7,11 +7,11 @@ export function Splash({ onComplete }: { onComplete: () => void }) {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Hide splash after 3 seconds
+    // Hide splash after 2200ms grace period
     const timer = setTimeout(() => {
       setIsVisible(false);
-      setTimeout(onComplete, 500); // give time for the exit animation
-    }, 3000);
+      setTimeout(onComplete, 1200); // give time for the ethereal exit animation
+    }, 2200);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -20,17 +20,23 @@ export function Splash({ onComplete }: { onComplete: () => void }) {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          initial={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: -60, filter: "blur(10px)" }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black overflow-hidden"
         >
           {/* Logo Container */}
           <div className="flex flex-col items-center select-none w-full max-w-sm">
-            {/* Blinking Logo */}
+            {/* Biometric Respiration Logo */}
             <motion.div
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+              initial={{ opacity: 0.3, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity, 
+                repeatType: "reverse", 
+                ease: [0.4, 0, 0.2, 1] 
+              }}
               className="relative flex items-center justify-center mb-8 w-44 h-44"
             >
               <svg

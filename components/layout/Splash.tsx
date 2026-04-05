@@ -24,7 +24,7 @@ export function Splash({ onComplete, onExitStart }: { onComplete: () => void, on
           initial={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: -60, filter: "blur(10px)" }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black overflow-hidden"
+          className="fixed inset-0 z-9999 flex flex-col items-center justify-center bg-black overflow-hidden"
         >
           {/* Logo Container */}
           <div className="flex flex-col items-center select-none w-full max-w-sm">

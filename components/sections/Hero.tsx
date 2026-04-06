@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Suspense } from "react";
+import {Suspense, useEffect, useState} from "react";
+
 
 // Dynamically import the 3D scene with no SSR
 const BlobScene = dynamic(() => import("./BlobScene"), { 
@@ -22,6 +23,14 @@ const BlobScene = dynamic(() => import("./BlobScene"), {
 });
 
 export function Hero() {
+
+  const [splashDelay, setSplashDelay] = useState(0);
+
+  useEffect(() => {
+    const count = parseInt(sessionStorage.getItem("splashCount") || "0");
+    setSplashDelay(count >= 2 ? 0 : 1);
+  }, []);
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -31,7 +40,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3.2 }} // Delay for splash screen
+            transition={{ duration: 0.8, delay: splashDelay ? 3.2 : 0.1 }} // Delay for splash screen
           >
             <span className="text-muted font-sans text-lg tracking-widest uppercase mb-4 block">
               Hi, I'm
@@ -41,7 +50,7 @@ export function Hero() {
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3.4 }}
+            transition={{ duration: 0.8, delay: splashDelay ? 3.4 : 0.2 }}
             className="text-6xl md:text-8xl lg:text-[96px] font-serif leading-none tracking-tight mb-4 max-w-full drop-shadow-lg"
           >
             Timothy Kiige
@@ -50,7 +59,7 @@ export function Hero() {
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3.6 }}
+            transition={{ duration: 0.8, delay: splashDelay ? 3.6 : 0.3 }}
             className="text-2xl md:text-3xl lg:text-4xl font-sans font-bold text-accent mb-6"
           >
             Full-Stack Developer
@@ -59,16 +68,16 @@ export function Hero() {
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3.8 }}
+            transition={{ duration: 0.8, delay: splashDelay ? 3.8 : 0.4 }}
             className="text-muted text-lg md:text-xl font-sans max-w-2xl leading-relaxed mb-10"
           >
-            UI/UX Enthusiast &middot; Building high-performance, scalable web apps.
+            Building elegant interfaces. Securing the systems beneath.
           </motion.p>
 
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 4.0 }}
+            transition={{ duration: 0.8, delay: splashDelay ? 4.0 : 0.5 }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
           >
             <Link 
@@ -92,7 +101,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, delay: 4.2 }}
+            transition={{ duration: 1.5, delay: splashDelay ? 4.2 : 0.6 }}
             className="w-full h-full max-w-lg absolute lg:right-0 pointer-events-auto"
           >
             <Suspense fallback={null}>
@@ -106,7 +115,7 @@ export function Hero() {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 4.5 }}
+        transition={{ duration: 1,   delay: splashDelay ? 4.5 : 0.7 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <Link href="#skills" aria-label="Scroll down">

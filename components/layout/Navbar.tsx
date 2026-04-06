@@ -42,7 +42,7 @@ export function Navbar() {
           : "bg-transparent py-6"
       )}
     >
-      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
+      <div className="container mx-auto px-10 md:px-12 flex items-center justify-between">
         {/* Left: Logo */}
         <Link href="#hero" className="flex items-center group">
           <div className="w-8 h-8 rounded-full border border-current flex items-center justify-center group-hover:bg-accent group-hover:text-black group-hover:border-accent transition-colors duration-300">
@@ -109,10 +109,10 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            initial={{ opacity: 0, x: 0.98 }}
+            animate={{ opacity: 1, x: 1 }}
+            exit={{ opacity: 0, x: 0.98 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
             className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-xl flex flex-col justify-center px-8"
           >
             <button
